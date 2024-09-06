@@ -1,0 +1,23 @@
+body {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#display {
+	width: 260px;
+	height: 65px;
+	background-color: rgb(202, 202, 202);
+}
+
+#calculator {
+	flex: 0 0 20%;
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: center;
+}
+
+button {
+	height: 65px;
+	width: 65px;
+}
