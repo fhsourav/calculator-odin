@@ -26,18 +26,32 @@ function operate(operator, num1, num2) {
 	}
 }
 
+let num = "", mathOperator = "";
+
+
 const calculator = document.querySelector("#calculator");
 
 const display = document.createElement("div");
 display.id = "display";
 
+const displayInput = document.createElement("div");
+displayInput.id = "displayInput";
+
 const displayNumber = document.createElement("p");
 displayNumber.id = "displayNumber";
-display.appendChild(displayNumber);
+displayNumber.textContent = "";
+displayInput.appendChild(displayNumber);
 
 const displayOperator = document.createElement("p");
 displayOperator.id = "displayOperator";
-display.appendChild(displayOperator);
+displayOperator.textContent = "";
+displayInput.appendChild(displayOperator);
+
+display.appendChild(displayInput);
+
+const displayResult = document.createElement("p");
+displayResult.id = "displayResult";
+display.appendChild(displayResult);
 
 calculator.appendChild(display);
 
@@ -90,13 +104,93 @@ const operatorList = [
 	}
 ]
 
+
+function clear() {
+	num = "";
+	mathOperator = "";
+	displayNumber.textContent = "";
+	displayOperator.textContent = "";
+	displayResult.textContent = "";
+}
+
+function showNum() {
+	displayResult.textContent = num;
+	displayNumber.textContent = "";
+}
+
+
 operatorList.forEach(element => {
 	const operator = document.createElement("button");
 	operator.textContent = element.sign;
 	operator.id = element.id;
 	operator.classList.add("operator");
 	operator.addEventListener("click", () =>{
-		displayOperator.textContent = operator.textContent;
+		if (operator.id == "clear") {
+			clear();
+		} else if (operator.id == "equals") {
+			if (num == "") {
+				if (displayNumber.textContent == "") {
+					clear();
+				} else {
+					num = displayNumber.textContent;
+					showNum();
+					displayOperator.textContent = "";
+				}
+			} else if (mathOperator == "") {
+				if (displayOperator.textContent == "") {
+					if (displayNumber.textContent == "") {
+						showNum();
+					} else {
+						num = displayNumber.textContent;
+						showNum();
+					}
+				} else {
+					if (displayNumber.textContent == "") {
+						showNum();
+						displayOperator.textContent = "";
+					} else {
+						num = operate(displayOperator.textContent, num, displayNumber.textContent);
+						showNum();
+						displayOperator.textContent = "";
+					}
+				}
+			} else {
+				if (displayNumber.textContent == "") {
+					showNum();
+					displayOperator.textContent = "";
+					mathOperator = "";
+				} else {
+					num = operate(mathOperator, num, displayNumber.textContent);
+					showNum();
+					displayNumber.textContent = "";
+					displayOperator.textContent = "";
+					mathOperator = "";
+				}
+			}
+		} else {
+			displayOperator.textContent = operator.textContent;
+			if (num == "") {
+				if (displayNumber.textContent == "") {
+					clear();
+				} else {
+					num = displayNumber.textContent;
+					showNum();
+					mathOperator = operator.textContent;
+				}
+			} else {
+				if (displayNumber.textContent == "") {
+					mathOperator == operator.textContent;
+				} else if (mathOperator == "") {
+					num = displayNumber.textContent;
+					mathOperator = operator.textContent;
+					showNum();
+				} else {
+					num = operate(mathOperator, num, displayNumber.textContent);
+					showNum();
+					mathOperator = operator.textContent;
+				}
+			}
+		}
 	});
 	operators.appendChild(operator);
 });
