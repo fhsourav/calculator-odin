@@ -25,3 +25,6 @@ function operate(operator, num1, num2) {
 		return divide(num1, num2);
 	}
 }
+
+const digit1 = document.querySelector("#1");
+digit1.addEventListener("")

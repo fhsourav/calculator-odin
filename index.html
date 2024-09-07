@@ -4,12 +4,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
-	<script src="script.js"></script>
+	<script src="script.js" defer></script>
 	<title>Calculator</title>
 </head>
 <body>
 	<div id="calculator">
-		<div id="display"></div>
+		<div id="display">
+			<p id="expression"></p>
+			<p id="result"></p>
+		</div>
 		<button type="button" id="clear">C</button>
 		<button type="button" id="divide" class="operator">/</button>
 		<button type="button" id="multiply" class="operator">*</button>

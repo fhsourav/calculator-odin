@@ -5,9 +5,18 @@ body {
 }
 
 #display {
+	display: flex;
+	align-items: center;
 	width: 260px;
 	height: 65px;
+}
+
+#expression {
+	width: 100%;
+	height: 100%;
 	background-color: rgb(202, 202, 202);
+	text-align: right;
+	font-size: 25px;
 }
 
 #calculator {
